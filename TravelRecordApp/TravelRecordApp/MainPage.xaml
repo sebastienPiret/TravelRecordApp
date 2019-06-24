@@ -9,15 +9,21 @@
 
     <StackLayout VerticalOptions="Center" 
                  Margin="15">
-        <Entry Placeholder="Email address"
-               Keyboard="Email"/>
-        <Entry Placeholder="Password"
-               IsPassword="True"/>
+        <Entry x:Name="emailEntry"
+            Placeholder="Email address"
+               Keyboard="Email"
+            TextColor="{StaticResource whiteColor}"
+            Text="Email"/>
+        <Entry x:Name="passEntry"
+            Placeholder="Password"
+               IsPassword="True"
+            TextColor="{StaticResource whiteColor}"
+            Text="Password"/>
         <Button x:Name="LoginButton" 
+                Margin="0,50"
                 Text="Log in"               
                Clicked="LoginButton_OnClicked"
-                BackgroundColor="DodgerBlue"
-                TextColor="White"/>
+/>
     </StackLayout>
 
 </ContentPage>
