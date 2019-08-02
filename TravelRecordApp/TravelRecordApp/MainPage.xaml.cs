@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
@@ -13,24 +15,17 @@ namespace TravelRecordApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private MainVM viewModel;
         public MainPage()
         {
             InitializeComponent();
-        }
 
-        private void LoginButton_OnClicked(object sender, EventArgs e)
-        {
-            bool isEmailEmpty = string.IsNullOrEmpty(emailEntry.Text);
-            bool isPassEmpty = string.IsNullOrEmpty(passEntry.Text);
+            var assembly = typeof(MainPage);
 
-            if (isEmailEmpty || isPassEmpty)
-            {
+            viewModel=new MainVM();
+            BindingContext = viewModel;
 
-            }
-            else
-            {
-                Navigation.PushAsync(new HomePage());
-            }
+            iconImage.Source=ImageSource.FromResource("TravelRecordApp.Assets.Images.plane.png",assembly);
         }
     }
 }

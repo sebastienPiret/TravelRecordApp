@@ -7,8 +7,10 @@
              x:Class="TravelRecordApp.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="blueColor">#1E90FF</Color>
+            <Color x:Key="blueColor">#138cff</Color>
             <Color x:Key="whiteColor">#FFF</Color>
+            <Color x:Key="darkGreyColor">#303030</Color>
+            <Color x:Key="alert">#F00</Color>
 
             <Style TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource blueColor}"/>

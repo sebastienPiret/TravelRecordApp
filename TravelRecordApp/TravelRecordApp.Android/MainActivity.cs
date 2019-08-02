@@ -1,11 +1,16 @@
 ﻿using System;
-
+using System.IO;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Provider;
+using Microsoft.WindowsAzure.MobileServices;
+using Plugin.Permissions;
+using Xamarin.Forms.Platform.Android;
+using Environment = Android.OS.Environment;
 
 namespace TravelRecordApp.Droid
 {
@@ -14,6 +19,8 @@ namespace TravelRecordApp.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //ResourceManager.Init(GetType().Assembly);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -21,13 +28,26 @@ namespace TravelRecordApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
+            CurrentPlatform.Init();
+
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this,savedInstanceState);
+
+            string dbName = "travel_db.sqlite";
+            string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string fullPath = Path.Combine(folderPath, dbName);
+
+            LoadApplication(new App(fullPath));
         }
+
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            //Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

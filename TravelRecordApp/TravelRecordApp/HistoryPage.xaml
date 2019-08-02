@@ -4,12 +4,30 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TravelRecordApp.HistoryPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to the history page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="TravelRecordApp.HistoryPage"
+                xmlns:converters="clr-namespace:TravelRecordApp.ViewModel.Converters"
+             BackgroundColor="{StaticResource darkGreyColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeToStringConverter x:Key="Converter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ListView x:Name="postListView"
+              
+              ItemsSource="{Binding Posts}"
+              ItemSelected="PostListView_OnItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Experience}"
+                          Detail="{Binding CREATEDAT, Converter={StaticResource Converter}}"
+                          TextColor="{StaticResource whiteColor}"
+                          DetailColor="{StaticResource whiteColor}">
+
+                </TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
 </ContentPage>

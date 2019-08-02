@@ -5,25 +5,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TravelRecordApp.MainPage"
-             BackgroundColor="DarkGray">
+             BackgroundColor="{StaticResource darkGreyColor}">
 
     <StackLayout VerticalOptions="Center" 
                  Margin="15">
+        <Image x:Name="iconImage"
+               Aspect="AspectFit"
+               HorizontalOptions="FillAndExpand"
+               HeightRequest="150"
+               Margin="0,0,0,50"/>
         <Entry x:Name="emailEntry"
-            Placeholder="Email address"
+               Text="{Binding email, Mode=TwoWay}"
+               Placeholder="Email address"
                Keyboard="Email"
-            TextColor="{StaticResource whiteColor}"
-            Text="Email"/>
+               TextColor="{StaticResource blueColor}"/>
         <Entry x:Name="passEntry"
-            Placeholder="Password"
+               Text="{Binding password, Mode=TwoWay}"
+               Placeholder="Password"
                IsPassword="True"
-            TextColor="{StaticResource whiteColor}"
-            Text="Password"/>
+               TextColor="{StaticResource whiteColor}"/>
         <Button x:Name="LoginButton" 
-                Margin="0,50"
+                Margin="0,50,0,0"
                 Text="Log in"               
-               Clicked="LoginButton_OnClicked"
-/>
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding User}"/>
+        <Label x:Name="check"
+               HorizontalTextAlignment="Center"
+               TextColor="{StaticResource alert}"/>
+        <Button x:Name="registerUserButton"
+                Text="Register"
+                HorizontalOptions="End" 
+                BackgroundColor="{StaticResource darkGreyColor}"
+                TextColor="{StaticResource blueColor}"
+                Command="{Binding registerNavigationCommand}"/>
     </StackLayout>
 
 </ContentPage>

@@ -4,12 +4,55 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TravelRecordApp.NewTravelPage">
+             x:Class="TravelRecordApp.NewTravelPage"
+             BackgroundColor="{StaticResource darkGreyColor}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     IconImageSource="save.png"
+                     Order="Primary"
+                     Command="{Binding PostCommand}"
+                     CommandParameter="{Binding Post}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to the new travel page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout x:Name="containerStackLayout">
+            <Entry Placeholder="Write your experience"
+                   PlaceholderColor="DarkGray"
+                   x:Name="experienceEntry"
+                   Text="{Binding Experience, Mode=TwoWay}"/>
+            <ListView x:Name="venueListview"
+                      SelectedItem="{Binding Venue, Mode=TwoWay}"
+                      Margin="20, 0"
+                      HorizontalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Text="{Binding name}"
+                                       TextColor="{StaticResource whiteColor}"
+                                       FontAttributes="Bold"/>
+                                <Label Grid.Row="1"
+                                       TextColor="DodgerBlue"
+                                       Text="{Binding location.address}"/>
+                                <Label Grid.Column="1"
+                                       Text="{Binding location.distance, StringFormat='{0} meters'}"
+                                       TextColor="DarkGray"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
